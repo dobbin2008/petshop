@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShop - Loja para Gatos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-color: #F8FAFC;
+            color: #1E293B;
+            line-height: 1.5;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        
+        header {
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            color: #3B82F6;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav {
+            background-color: #3B82F6;
+            padding: 16px 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 32px;
+        }
+        
+        .nav-links a {
+            color: #FFFFFF;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-links a:hover, .nav-links a:focus {
+            background-color: #2563EB;
+        }
+        
+        main {
+            padding: 32px 0;
+            min-height: calc(100vh - 200px);
+        }
+        
+        footer {
+            background-color: #1E293B;
+            color: #FFFFFF;
+            padding: 24px 0;
+            text-align: center;
+        }
+        
+        .wireframe {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+        
+        .wireframe:target {
+            display: block;
+        }
+        
+        #wireframe-1 {
+            display: block;
+        }
+        
+        .hero {
+            background-color: #EFF6FF;
+            padding: 48px 32px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: #1E293B;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #64748B;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3B82F6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: #2563EB;
+        }
+        
+        .features {
+            margin-top: 48px;
+        }
+        
+        .features h2 {
+            text-align: center;
+            margin-bottom: 32px;
+            color: #1E293B;
+            font-size: 28px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        
+        .feature-card {
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            text-align: center;
+        }
+        
+        .feature-card i {
+            font-size: 40px;
+            color: #3B82F6;
+            margin-bottom: 16px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 12px;
+            font-size: 20px;
+            color: #1E293B;
+        }
+        
+        /* Wireframe 2 - Ajuda/FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-title {
+            text-align: center;
+            margin-bottom: 32px;
+            color: #1E293B;
+            font-size: 28px;
+        }
+        
+        .faq-item {
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+        }
+        
+        .faq-item h3 {
+            color: #3B82F6;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        
+        /* Wireframe 3 - Chat */
+        .chat-container {
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .chat-title {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #1E293B;
+            font-size: 28px;
+        }
+        
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #E2E8F0;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            background: #F8FAFC;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .message {
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+        
+        .message.support {
+            background: #DBEAFE;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message.user {
+            background: #F1F5F9;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        .chat-input button {
+            background-color: #3B82F6;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        /* Wireframe 4 - Cadastro */
+        .form-container {
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            padding: 32px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #1E293B;
+            font-size: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+        
+        /* Wireframe 5 - Pesquisa */
+        .search-container {
+            margin-bottom: 32px;
+        }
+        
+        .search-title {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #1E293B;
+            font-size: 28px;
+        }
+        
+        .search-bar {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px 0 0 6px;
+            font-size: 16px;
+        }
+        
+        .search-bar button {
+            background-color: #3B82F6;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        
+        .product-card {
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+        }
+        
+        .product-image {
+            height: 180px;
+            background-color: #EFF6FF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-image i {
+            font-size: 64px;
+            color: #3B82F6;
+        }
+        
+        .product-info {
+            padding: 16px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 8px;
+            font-size: 18px;
+            color: #1E293B;
+        }
+        
+        .product-info p {
+            color: #64748B;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            color: #1E293B;
+            font-size: 20px;
+            margin: 8px 0;
+        }
+        
+        .add-to-cart {
+            display: block;
+            width: 100%;
+            background-color: #3B82F6;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 12px;
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .nav-links a {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+            
+            .hero h1 {
+                font-size: 24px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .features-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .form-buttons .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .chat-input {
+                flex-direction: column;
+            }
+            
+            .chat-input button {
+                border-radius: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-cat"></i>
+                <span>PetShop</span>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#wireframe-1"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#wireframe-2"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+                <li><a href="#wireframe-3"><i class="fas fa-comments"></i> Chat</a></li>
+                <li><a href="#wireframe-4"><i class="fas fa-user"></i> Cadastro</a></li>
+                <li><a href="#wireframe-5"><i class="fas fa-search"></i> Pesquisa</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <!-- Wireframe 1 - Página Inicial -->
+        <section id="wireframe-1" class="wireframe">
+            <div class="hero">
+                <h1>Bem-vindo ao PetShop</h1>
+                <p>Encontre os melhores produtos para o seu gato com qualidade e preço justo.</p>
+                <a href="#wireframe-5" class="btn">Ver Produtos</a>
+            </div>
+            
+            <div class="features">
+                <h2>Nossos Destaques</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-truck"></i>
+                        <h3>Entrega Rápida</h3>
+                        <p>Entregamos em todo o Brasil com rapidez e segurança.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Produtos de Qualidade</h3>
+                        <p>Todos os produtos são testados e aprovados por especialistas.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <i class="fas fa-headset"></i>
+                        <h3>Suporte 24/7</h3>
+                        <p>Nossa equipe está sempre pronta para ajudar você.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Wireframe 2 - Ajuda/FAQ -->
+        <section id="wireframe-2" class="wireframe">
+            <h2 class="faq-title">Perguntas Frequentes</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3>Como faço para rastrear meu pedido?</h3>
+                    <p>Após a confirmação do pagamento, você receberá um e-mail com o código de rastreamento. Você também pode acessar sua conta em nosso site para acompanhar o pedido.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Qual o prazo de entrega?</h3>
+                    <p>O prazo de entrega varia de acordo com sua localização. Em média, para regiões metropolitanas, o prazo é de 3 a 5 dias úteis após a confirmação do pagamento.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Vocês oferecem garantia nos produtos?</h3>
+                    <p>Sim, todos os produtos têm garantia contra defeitos de fabricação. O período de garantia varia de acordo com o produto e é informado na página do item.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Como trocar ou devolver um produto?</h3>
+                    <p>Entre em contato conosco dentro de 7 dias após o recebimento do produto para solicitar a troca ou devolução. O produto deve estar na embalagem original e com todos os acessórios.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Wireframe 3 - Chat -->
+        <section id="wireframe-3" class="wireframe">
+            <h2 class="chat-title">Chat de Atendimento</h2>
+            
+            <div class="chat-container">
+                <div class="chat-messages">
+                    <div class="message support">
+                        Olá! Sou a assistente virtual. Como posso ajudar você hoje?
+                    </div>
+                    <div class="message user">
+                        Olá! Gostaria de saber sobre o prazo de entrega para minha região.
+                    </div>
+                    <div class="message support">
+                        Claro! Para isso, preciso do seu CEP. Você pode informar?
+                    </div>
+                </div>
+                
+                <div class="chat-input">
+                    <input type="text" placeholder="Digite sua mensagem...">
+                    <button>Enviar</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Wireframe 4 - Cadastro -->
+        <section id="wireframe-4" class="wireframe">
+            <h2 class="form-title">Crie sua Conta</h2>
+            
+            <form class="form-container">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="endereco">Endereço</label>
+                    <input type="text" id="endereco" required>
+                </div>
+                
+                <div class="form-buttons">
+                    <a href="#wireframe-1" class="btn" style="background-color: #64748B;">Cancelar</a>
+                    <button type="submit" class="btn">Criar Conta</button>
+                </div>
+            </form>
+        </section>
+        
+        <!-- Wireframe 5 - Pesquisa -->
+        <section id="wireframe-5" class="wireframe">
+            <div class="search-container">
+                <h2 class="search-title">Pesquisar Produtos</h2>
+                <div class="search-bar">
+                    <input type="text" placeholder="Digite o nome do produto...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ração Premium</h3>
+                        <p>Ração super premium para gatos adultos.</p>
+                        <div class="product-price">R$ 129,90</div>
+                        <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-baseball-ball"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Brinquedo para Gatos</h3>
+                        <p>Varinha com penas para diversão garantida.</p>
+                        <div class="product-price">R$ 24,90</div>
+                        <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Arranhador</h3>
+                        <p>Arranhador vertical com plataforma.</p>
+                        <div class="product-price">R$ 189,90</div>
+                        <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Areia Higiênica</h3>
+                        <p>Areia vegetal com ótima absorção.</p>
+                        <div class="product-price">R$ 39,90</div>
+                        <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-bowl-food"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Comedouro Duplo</h3>
+                        <p>Comedouro em cerâmica com divisória.</p>
+                        <div class="product-price">R$ 49,90</div>
+                        <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Cama Confortável</h3>
+                        <p>Cama macia e quente para seu gato.</p>
+                        <div class="product-price">R$ 89,90</div>
+                        <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Vitaminas</h3>
+                        <p>Complexo vitamínico para gatos.</p>
+                        <div class="product-price">R$ 59,90</div>
+                        <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Antipulgas</h3>
+                        <p>Prevenção contra pulgas e carrapatos.</p>
+                        <div class="product-price">R$ 45,90</div>
+                        <button class="add-to-cart">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>PetShop &copy; 2023 - Todos os direitos reservados</p>
+        </div>
+    </footer>
+</body>
+</html>
